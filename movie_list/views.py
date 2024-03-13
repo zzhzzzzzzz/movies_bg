@@ -246,7 +246,7 @@ def pie_data(request):
     try:
         movie = AllMovies.objects.values()
         movie=pd.DataFrame(movie)
-        data = movie['kind']
+        data = movie['country']
         ls = []
         c_ls = []
         c_dic = {}
