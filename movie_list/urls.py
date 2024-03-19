@@ -17,4 +17,7 @@ urlpatterns = [
     path('search/info/<int:id>',searchmovie),
 
     path('pie_data', pie_data),
+    path('bar_data', bar_data),
+    path('hist_data', hist_data),
+    path('line_data', line_data),
 ]

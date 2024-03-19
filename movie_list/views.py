@@ -250,6 +250,8 @@ def pie_data(request):
         ls = []
         c_ls = []
         c_dic = {}
+        other={}
+        d1 = {}
         for i in data:
             if '/' in i:
                 for j in i.split('/'):
@@ -262,9 +264,68 @@ def pie_data(request):
 
         for i in c_dic.items():
             d = {}
-            d['value'] = i[1]
-            d['name'] = i[0]
-            ls.append(d)
+            if i[1] >= 5:
+                d['value'] = i[1]
+                d['name'] = i[0]
+                ls.append(d)
+            else:
+                other['其它地区(发布电影数<5的地区集合)'] = other.get('其它地区(发布电影数<5的地区集合)', 0) + i[1]
+        for j in other.items():
+            d1['value'] = j[1]
+            d1['name'] = j[0]
+            ls.append(d1)
         return JsonResponse({'data':ls})
+    except Exception as e:
+        return JsonResponse(Messages.NOT_FOUND)
+
+def bar_data(request):
+    try:
+        movie = AllMovies.objects.values()
+        movie=pd.DataFrame(movie)
+        data = movie['kind']
+        ls = []
+        dic = {}
+        for i in data:
+            if '/' in i:
+                for j in i.split('/'):
+                    ls.append(j.strip())
+            if '/' not in i:
+                for j in i.split():
+                    ls.append(j.strip())
+        for x in ls:
+            dic[x] = dic.get(x, 0) + 1
+        return JsonResponse(dic)
+    except Exception as e:
+        return JsonResponse(Messages.NOT_FOUND)
+
+def hist_data(request):
+    try:
+        movie = AllMovies.objects.values()
+        movie=pd.DataFrame(movie)
+        data = movie['time'].dropna()
+        ls = []
+        t_ls = []
+        for i in data:
+            ls.append(i)
+        for i in ls:
+            if '分钟' in i:
+                t_ls.append(i[:-2])
+        return JsonResponse({'time':t_ls})
+    except Exception as e:
+        return JsonResponse(Messages.NOT_FOUND)
+
+def line_data(request):
+    try:
+        movie = AllMovies.objects.values()
+        movie=pd.DataFrame(movie)
+        data = movie['releasedate'].dropna()
+        ls = []
+        dic = {}
+        for i in data:
+            i = i[:4]
+            ls.append(i)
+        for x in ls:
+            dic[x] = dic.get(x, 0) + 1
+        return JsonResponse(dic)
     except Exception as e:
         return JsonResponse(Messages.NOT_FOUND)
