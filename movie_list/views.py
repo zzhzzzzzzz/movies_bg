@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
-import pandas as pd
 plt.rcParams['font.sans-serif']=['Microsoft YaHei']
 plt.rcParams['axes.unicode_minus']=False
+import pandas as pd
 
 import math
 
@@ -329,3 +329,303 @@ def line_data(request):
         return JsonResponse(dic)
     except Exception as e:
         return JsonResponse(Messages.NOT_FOUND)
+
+class MovieView6(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(releasedate__istartswith='20')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'release_date':movie.releasedate}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView7(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(releasedate__istartswith='199')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'release_date':movie.releasedate}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView8(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(releasedate__istartswith='198')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'release_date':movie.releasedate}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView9(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects
+            total = mgr.count()
+            movies = AllMovies.objects.order_by('pk')[start:start + size]  # 全表
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,
+                 'release_date':movie.releasedate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView10(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(kind__icontains='剧情')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView11(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(kind__icontains='动画')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView12(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(kind__icontains='喜剧')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+class MovieView13(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(kind__icontains='动作')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView14(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(kind__icontains='爱情')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView15(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(kind__icontains='科幻')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView16(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(kind__icontains='奇幻')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)
+
+class MovieView17(View):
+    def get(self, request):  # 方法名一定是小写
+        try:
+            page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
+            size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)
+
+            start = size * (page - 1)
+            mgr = AllMovies.objects.filter(kind__icontains='冒险')
+            total = mgr.count()
+            movies = mgr[start:start + size]
+
+            return JsonResponse({"movies": [
+                {"id": movie.id, "title": movie.title,'rate':movie.rate,'kind':movie.kind}
+                for movie in movies
+            ],
+                "pagination": {
+                    'page': page,
+                    'size': size,
+                    'total': total,
+                    'pages': math.ceil(total / size),
+                }
+            })
+        except Exception as e:
+            return JsonResponse(Messages.BAD_REQUEST)

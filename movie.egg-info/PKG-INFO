@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: movie
+Version: 1.0.1
+Summary: 电影数据分析可视化系统
+Home-page: http://47.113.180.127/
+Author: Zhang Zihao
+Author-email: 1336029976@qq.com
+Requires-Python: >=3.6

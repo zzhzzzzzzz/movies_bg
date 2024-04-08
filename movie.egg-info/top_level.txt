@@ -1,0 +1,5 @@
+manage
+messages
+movie
+movie_list
+user
