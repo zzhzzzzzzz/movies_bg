@@ -52,35 +52,26 @@ def get_info(list=None):
             title = root.xpath("//div[@id='content']/h1//span[@property]/text()")
             print(*title)
             collection_data(title,movies_title)
-
             # 上映时间
             year= root.xpath('//div[@id="info"]/span[@property="v:initialReleaseDate"]/text()')
             print(*year)
             collection_data(year, release_date)
-
             # 豆瓣评分
             rate = root.xpath("//div[@id='content']//strong/text()")
             print(*rate)
             collection_data(rate, movies_rate)
-
-
-
             # 类别
             kind=root.xpath('//div[@id="info"]/span[@property="v:genre"]/text()')
             collection_data(kind, movie_kind)
-
             # 片长
             time=root.xpath('//div[@id="info"]/span[@property="v:runtime" ]/text()')
             collection_data(time,movie_time)
-
             # 导演
             director=root.xpath('//div[@id="info"]//a[@rel="v:directedBy"]/text()')
             collection_data(director, movie_director)
-
             #主演列表
             actor=root.xpath('//div[@id="info"]//span [@class="actor"]/span[@class="attrs"]//a[@rel="v:starring"]/text()')
             collection_data(actor,movie_actor)
-
 
             D=root.xpath("//div[@id='info']/text()")
             l=[]

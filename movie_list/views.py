@@ -69,7 +69,7 @@ def getweekmovie(request,id): #详情页
         return JsonResponse(Messages.NOT_FOUND)
 
 class MovieView2(View):
-    def get(self,request): #方法名一定是小写
+    def get(self,request):
         try:
             page=vaildate(request.GET, 'page', 1 , int , lambda x, y: x if x > 0 and x < 51 else y)
             size=vaildate(request.GET, 'size', 5, int , lambda x, y: x if x > 0 and x < 101 else y)
@@ -77,7 +77,7 @@ class MovieView2(View):
             start=size*(page-1)
             mgr=BoxOffice.objects
             total=mgr.count()
-            movies=BoxOffice.objects.order_by('pk')[start:start+size] #全表
+            movies=BoxOffice.objects.order_by('pk')[start:start+size]
 
             return  JsonResponse({"movies":[
                 {"id":movie.id,"title":movie.title,'rate':movie.rate}
@@ -93,13 +93,13 @@ class MovieView2(View):
         except Exception as e:
             return JsonResponse(Messages.BAD_REQUEST)
 
-def getboxoffice(request,id): #详情页
+def getboxoffice(request,id):
     try:
         movie=BoxOffice.objects.get(pk=id)
         return JsonResponse({'movie': {
             'id':movie.pk,
             'title':movie.title,
-            "releasedate":movie.releasedate,  #utc字符串
+            "releasedate":movie.releasedate,
             "director":movie.director,
             "rate":movie.rate,
             "kind":movie.kind,
@@ -200,7 +200,7 @@ def gettopmovie(request,id): #详情页
         return JsonResponse(Messages.NOT_FOUND)
 
 class MovieView4(View):
-    def get(self, request,info):  # 方法名一定是小写
+    def get(self, request,info):
         try:
             page = vaildate(request.GET, 'page', 1, int, lambda x, y: x if x > 0 and x < 51 else y)
             size = vaildate(request.GET, 'size', 5, int, lambda x, y: x if x > 0 and x < 101 else y)

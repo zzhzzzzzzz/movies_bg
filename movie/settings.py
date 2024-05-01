@@ -25,7 +25,7 @@ SECRET_KEY = '+a#*1$vkf+$5147fjyb8=qcv5u!-ezbtp@2)s0lf^6-!6ykg3f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,11 +80,21 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'movies',
         'USER': 'root',
-        'PASSWORD': '1234567890',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'Zzh1234567890',
+        'HOST': 'rm-bp1y3zyn83u7p3f5nto.mysql.rds.aliyuncs.com',
         'PORT': '3306',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'movies',
+#         'USER': 'zzh',
+#         'PASSWORD': '1234567890',
+#         'HOST': 'mysql',
+#         'PORT': '3306',
+#     }
+# }
 
 
 # Password validation
@@ -124,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # 设置静态文件收集目录 没有这条docker会报错
 
 LOGGING = {
     'version':1,
